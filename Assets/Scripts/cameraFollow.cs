@@ -4,40 +4,57 @@ using UnityEngine;
 
 public class cameraFollow : MonoBehaviour
 {
-    public Transform Target;
-    //camera transform
-    public Transform camTransform;
-    // offset between camera and target
-    public Vector3 Offset;
-    // change this value to get desired smoothness
-    public float SmoothTime = 0.3f;
+    [SerializeField]
+    private Transform target;
 
-    // This value will change at the runtime depending on target movement. Initialize with zero vector.
-    private Vector3 velocity = Vector3.zero;
+    [SerializeField]
+    private Vector3 offsetPosition;
 
-    private void Start()
-    {
-        //Offset = camTransform.position - Target.position;
-    }
-    private void Update()
-    {
-        /*        if (GameManager.Manager.isFinishLineCrossed)
-                {
-                    Offset = new Vector3(-19, 5, -4);
-                    if(Target != null)
-                        Target = pm.Snow.transform;
-                }*/
-    }
+    [SerializeField]
+    private Space offsetPositionSpace = Space.Self;
+
+    [SerializeField]
+    private bool lookAt = true;
+
+
+
+
+public float maxPos, currentPos, speed;
     private void LateUpdate()
     {
-        if (Target != null)
-        {
-            // update position
-            Vector3 targetPosition = Target.position + new Vector3(Offset.x, Offset.y + 5, Offset.z);
-            camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
+        Refresh();
+    }
 
-            // update rotation
-            //transform.LookAt(Target);
+    public void Refresh()
+    {
+        if (target == null)
+        {
+            Debug.LogWarning("Missing target ref !", this);
+
+            return;
+        }
+        if(currentPos >=maxPos){
+            currentPos -= speed;
+        }
+        offsetPosition = new Vector3(offsetPosition.x,offsetPosition.y,currentPos);
+        // compute position
+        if (offsetPositionSpace == Space.Self)
+        {
+            transform.position = target.TransformPoint(offsetPosition);
+        }
+        else
+        {
+            transform.position = target.position + offsetPosition;
+        }
+
+        // compute rotation
+        if (lookAt)
+        {
+            transform.LookAt(target);
+        }
+        else
+        {
+            transform.rotation = target.rotation;
         }
     }
 }
