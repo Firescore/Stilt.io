@@ -6,6 +6,7 @@ public class movement : MonoBehaviour
     public float speed = 2f;
     public float maxSize = 0;
     public float currentSize = 0;
+    public float initialSize = 0;
 
     public Transform wood1, wood2;
 
@@ -32,14 +33,8 @@ public class movement : MonoBehaviour
         wood2.localScale = new Vector3(wood2.localScale.x,currentSize,wood2.localScale.z);
         
     }
-    public void setMaxSize(float s)
-    {
-        maxSize = s;
-    }
-    public void chrecterPlayerRun(){
-        charecterPlayerAnime.SetBool("run", true);
-    }
-    public void charecterPlayerStopRunning(){
-        charecterPlayerAnime.SetBool("run", false);
+    public void setSizeInitial(){
+        maxSize=initialSize;
+        currentSize=initialSize;
     }
 }

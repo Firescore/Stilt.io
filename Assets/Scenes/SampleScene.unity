@@ -1023,6 +1023,7 @@ MonoBehaviour:
   speed: 0.01
   maxSize: 0
   currentSize: 0
+  initialSize: 0
   wood1: {fileID: 227913220}
   wood2: {fileID: 1978000143}
   charecterPlayerAnime: {fileID: 919132147646740598}
@@ -3071,7 +3072,6 @@ GameObject:
   - component: {fileID: 2037825908}
   - component: {fileID: 2037825910}
   - component: {fileID: 2037825909}
-  - component: {fileID: 2037825911}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3087,7 +3087,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037825906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.17, y: 0.401, z: -4.881}
+  m_LocalPosition: {x: 3.17, y: 0.401, z: -5.032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2090353667}
@@ -3109,14 +3109,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   anime: {fileID: 919132147646740598}
-  anime1: {fileID: 2037825911}
+  anime1: {fileID: 0}
   child: {fileID: 0}
   mv: {fileID: 502368178}
   cameraScript: {fileID: 365700009}
   maxSize: 0.42
   currentSize: 0.42
   incrementSpeed: 0.01
-  incrementSize: 0.11
+  incrementSize: 0.1
+  initialSize: 0.42
+  delay: 0.7
 --- !u!54 &2037825909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3146,25 +3148,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &2037825911
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2037825906}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 06f138cd5583e004fb9a4ee1a9b3a9ae, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2090353665
 GameObject:
   m_ObjectHideFlags: 0
