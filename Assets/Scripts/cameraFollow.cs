@@ -16,6 +16,7 @@ public class cameraFollow : MonoBehaviour
     [SerializeField]
     private bool lookAt = true;
 
+    private float initialPos = -3;
 
 
 
@@ -56,5 +57,9 @@ public float maxPos, currentPos, speed;
         {
             transform.rotation = target.rotation;
         }
+    }
+    public void inisalPos(){
+        maxPos = initialPos;
+        currentPos = initialPos;
     }
 }

@@ -15,6 +15,8 @@ public class movement : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+        currentSize = 0;
+        maxSize = 0;
     }
 
     // Update is called once per frame

@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private float moveSpeed = 0.01f, turnInput, turnStrength = 90f, moveInput, timer;
     public float speed = 1;
-    public Animator anime, anime1;
+    public Animator anime;
     public GameObject child;
     public movement mv;
     public cameraFollow cameraScript;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         currentPos = transform.position;
-        incrementalPos = maxSize;
+        incrementalPos = maxSize * 2;
         turnInput = Input.GetAxis("Horizontal");
         moveInput = Input.GetAxis("Vertical");
         transform.Translate(Vector3.forward*moveInput*speed*Time.deltaTime);
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         }
         value();
         //Animation();
-        //fallDown();
+        fallDown();
         StartCoroutine(teleportation(delay));
     }
     void value(){
@@ -55,24 +55,24 @@ public class PlayerMovement : MonoBehaviour
     // }
 
 
-    // void fallDown(){
+    void fallDown(){
 
-    //     if(Input.GetKey(KeyCode.T)){
-    //         speedR = 2;
-    //         x=75;
-    //         if(y <= x){
-    //             y += speedR;
-    //         }
-    //         transform.rotation = Quaternion.Euler(y,transform.eulerAngles.y,transform.eulerAngles.z);
-    //         cameraScript.enabled = false;
-    //     }
+        if(Input.GetKey(KeyCode.E)){
+            speedR = 5;
+            x=89;
+            if(y <= x){
+                y += speedR;
+            }
+            transform.rotation = Quaternion.Euler(y,transform.eulerAngles.y,transform.eulerAngles.z);
+            cameraScript.enabled = false;
+        }
 
-    //     if(Input.GetKeyUp(KeyCode.T)){
-    //         y=0;
-    //         transform.rotation = Quaternion.Euler(y,transform.eulerAngles.y,transform.eulerAngles.z);
-    //         cameraScript.enabled = true;
-    //     }
-    // }
+        if(Input.GetKeyUp(KeyCode.E)){
+            y=0;
+            transform.rotation = Quaternion.Euler(y,transform.eulerAngles.y,transform.eulerAngles.z);
+            cameraScript.enabled = true;
+        }
+    }
 
     public void setInSize(){
         maxSize=initialSize;
@@ -80,10 +80,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     IEnumerator teleportation(float t){
-        if(Input.GetKeyDown(KeyCode.T)){
+        if(Input.GetKeyDown(KeyCode.E)){
             yield return new WaitForSeconds(t);
-            // transform.position = currentPos + new Vector3(incrementalPos,0,incrementalPos);
+            transform.position += transform.up * incrementalPos;
             mv.setSizeInitial();
+            cameraScript.inisalPos();
             setInSize();
         }
     }
