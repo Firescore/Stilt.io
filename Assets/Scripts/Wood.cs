@@ -20,6 +20,12 @@ private void Start() {
             cF.maxPos -= 0.35f;
             Destroy(gameObject);
         }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.GetComponentInParent<enemyMovementData>().maxM += other.GetComponentInParent<enemyMovementData>().incrementalM;
+            other.GetComponentInParent<enemyMovementData>().maxw1w2 -= other.GetComponentInParent<enemyMovementData>().incrementalSpeedw1w2;
+            Destroy(gameObject);
+        }
     
     }
 }
