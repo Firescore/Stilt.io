@@ -15,11 +15,11 @@ private void Start() {
 }
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Player")){
-            move.maxSize -= 0.00032f;
+            move.maxSize -= 0.00064f;
             pM.maxSize += pM.incrementSize;
-            cF.maxPos -= 1f;
+            cF.maxPos -= 0.35f;
             Destroy(gameObject);
         }
     
-}
+    }
 }

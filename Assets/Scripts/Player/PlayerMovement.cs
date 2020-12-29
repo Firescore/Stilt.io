@@ -4,41 +4,65 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float moveSpeed = 0.01f, turnInput, turnStrength = 90f, moveInput, timer;
+    private float moveSpeed = 0.01f, turnInput, turnStrength = 100f, moveInput, timer;
     public float speed = 1;
     public Animator anime;
+    public Animator fallAnime;
     public GameObject child;
     public movement mv;
     public cameraFollow cameraScript;
+    public RaycastSystem rS;
+    
     public Transform charecter;
 
     private Vector3 currentPos;
     private float incrementalPos;
-    public float maxSize=0.42f, currentSize=0, incrementSpeed=0.01f, incrementSize=0.11f, initialSize = 0.42f;
+    public float maxSize=0f, currentSize=0, incrementSpeed=0.01f, incrementSize=0.11f, initialSize = 0f;
     public float delay;
     float x,y,speedR;
     float m,n;
+
+    public bool ab;
+
     private void Start() {
-    child = transform.GetChild(0).gameObject;
+    //child = transform.GetChild(0).gameObject;
 }
     private void Update()
     {
-        currentPos = transform.position;
         incrementalPos = maxSize * 2;
+
         turnInput = Input.GetAxis("Horizontal");
         moveInput = Input.GetAxis("Vertical");
+
         transform.Translate(Vector3.forward*moveInput*speed*Time.deltaTime);
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrength * Time.deltaTime, 0));
+
         if(moveInput >0){
             anime.SetBool("run",true);
         }else{
             anime.SetBool("run",false);
         }
-        if(currentSize<=maxSize){
+
+        if (currentSize <= maxSize)
+        {
             currentSize += incrementSpeed;
         }
+        if (currentSize >= maxSize && ab)
+        {
+            currentSize -= incrementSpeed * 4;
+        }
+
+
+
+
+
+
+        if (transform.position == rS.nextPosition)
+        {
+            ab = false;
+        }
         value();
-        //Animation();
+        test();
         fallDown();
         StartCoroutine(teleportation(delay));
     }
@@ -46,14 +70,16 @@ public class PlayerMovement : MonoBehaviour
         child.transform.localPosition = new Vector3(child.transform.localPosition.x,currentSize,child.transform.localPosition.z);
     }
 
-    float a, b, c, d, e;
+    float b, d;
     
     void fallDown(){
 
-        if(Input.GetKey(KeyCode.E)){
-            anime.enabled = false;
+        if(Input.GetKeyDown(KeyCode.E)){
+
+            
+            /*anime.enabled = false;
             speedR = 5;
-            x=75;
+            x=50;
             if(y <= x){
                 y += speedR;
             }
@@ -72,9 +98,8 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(y,transform.eulerAngles.y,transform.eulerAngles.z);
 
             charecter.rotation = Quaternion.Euler(n, transform.eulerAngles.y, transform.eulerAngles.z);
-            charecter.localPosition = new Vector3(0, b, d);
-
-            cameraScript.enabled = false;
+            charecter.localPosition = new Vector3(0, b, d);*/
+            /*cameraScript.enabled = false;*/
         }
 
         if(Input.GetKeyUp(KeyCode.E)){
@@ -87,22 +112,36 @@ public class PlayerMovement : MonoBehaviour
 
             charecter.rotation = Quaternion.Euler(n, transform.eulerAngles.y, transform.eulerAngles.z);
             charecter.localPosition = new Vector3(0, b, d);
-            cameraScript.enabled = true;
+            /*cameraScript.enabled = true;*/
         }
     }
 
     public void setInSize(){
         maxSize=initialSize;
-        currentSize=initialSize;
+        //currentSize=initialSize;
     }
 
     IEnumerator teleportation(float t){
         if(Input.GetKeyDown(KeyCode.E)){
+            fallAnime.SetTrigger("fall");
+            anime.SetTrigger("fall");
             yield return new WaitForSeconds(t);
-            transform.position += charecter.forward * incrementalPos;
             mv.setSizeInitial();
             cameraScript.inisalPos();
             setInSize();
+            ab = true;
         }
     }
+    void test()
+    {
+        if (ab)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, rS.nextPosition, 4f * Time.deltaTime);
+        }
+        
+    }
+
+
+
+
 }

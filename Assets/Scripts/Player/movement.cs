@@ -11,10 +11,13 @@ public class movement : MonoBehaviour
     public Transform wood1, wood2;
 
     [SerializeField] public Animator charecterPlayerAnime;
+
+    private PlayerMovement pM;
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
+        pM = FindObjectOfType<PlayerMovement>();
         currentSize = 0;
         maxSize = 0;
     }
@@ -30,7 +33,7 @@ public class movement : MonoBehaviour
         {
             currentSize -= speed;
         }
-        
+
         wood1.localScale = new Vector3(wood1.localScale.x,currentSize,wood1.localScale.z);
         wood2.localScale = new Vector3(wood2.localScale.x,currentSize,wood2.localScale.z);
         
@@ -39,4 +42,13 @@ public class movement : MonoBehaviour
         maxSize=initialSize;
         currentSize=initialSize;
     }
+
+/*    public void run()
+    {
+        pM.anime.SetBool("run", true);
+    }
+    public void stop()
+    {
+        pM.anime.SetBool("run", false);
+    }*/
 }

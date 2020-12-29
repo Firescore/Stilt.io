@@ -37,6 +37,10 @@ public float maxPos, currentPos, speed;
         if(currentPos >=maxPos){
             currentPos -= speed;
         }
+        if(currentPos <= maxPos)
+        {
+            currentPos += speed;
+        }
         offsetPosition = new Vector3(offsetPosition.x,offsetPosition.y,currentPos);
         // compute position
         if (offsetPositionSpace == Space.Self)
@@ -60,6 +64,5 @@ public float maxPos, currentPos, speed;
     }
     public void inisalPos(){
         maxPos = initialPos;
-        currentPos = initialPos;
     }
 }
