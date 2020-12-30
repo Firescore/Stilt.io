@@ -14,7 +14,7 @@ public class PowerUps : MonoBehaviour
             Points.Add(child.transform);
         }
         for(int i=0;i<Points.Count;i++){
-           GameObject a = Instantiate(WoodBundle,Points[i].transform.position,Quaternion.identity);
+           GameObject a = Instantiate(WoodBundle,Points[i].transform.position,Quaternion.Euler(0,9,0));
            a.transform.parent = transform;
         }
     }
