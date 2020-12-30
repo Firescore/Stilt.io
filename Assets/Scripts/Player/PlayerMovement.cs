@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     float x,y,speedR;
     float m,n;
 
-    public bool ab;
+    public bool ab,a;
 
     private void Start() {
     //child = transform.GetChild(0).gameObject;
@@ -56,10 +56,10 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
         if (transform.position == rS.nextPosition)
         {
             ab = false;
+            a = false;
         }
         value();
         test();
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void setInSize(){
         maxSize=initialSize;
-        //currentSize=initialSize;
+        
     }
 
     IEnumerator teleportation(float t){
@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
             cameraScript.inisalPos();
             setInSize();
             ab = true;
+ /*           currentSize = initialSize;*/
         }
     }
     void test()

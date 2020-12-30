@@ -16,17 +16,17 @@ RenderSettings:
   serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogMode: 1
+  m_FogDensity: 0.05
   m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogEnd: 10
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.026698314, g: 0.13392809, b: 0.3673436, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3736,7 +3736,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365700004}
-  m_LocalRotation: {x: 0.2297529, y: -4.2725646e-15, z: 1.6836258e-15, w: 0.973249}
+  m_LocalRotation: {x: 0.2297529, y: -9.099279e-16, z: 9.393117e-16, w: 0.973249}
   m_LocalPosition: {x: 3.18, y: 1.0209999, z: -5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3790,7 +3790,7 @@ MonoBehaviour:
   offsetPosition: {x: 0, y: 2, z: -3}
   offsetPositionSpace: 1
   lookAt: 1
-  maxPos: -4.05
+  maxPos: -3
   currentPos: -3
   speed: 0.1
 --- !u!114 &365700010
@@ -11170,7 +11170,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182975856}
-  m_LocalRotation: {x: 0.2297529, y: -4.2725646e-15, z: 1.6836258e-15, w: 0.973249}
+  m_LocalRotation: {x: 0.2297529, y: -9.099279e-16, z: 9.393117e-16, w: 0.973249}
   m_LocalPosition: {x: 3.18, y: 1.0209999, z: -5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14841,7 +14841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Jedhalal
+  m_text: Jethalal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19410,6 +19410,7 @@ MonoBehaviour:
   initialSize: 0.12
   delay: 0.75
   ab: 0
+  a: 0
 --- !u!54 &2037825909
 Rigidbody:
   m_ObjectHideFlags: 0
