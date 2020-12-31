@@ -15,6 +15,9 @@ private void Start() {
 }
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Player")){
+            GameObject a = Instantiate(move.points, move.pointSpwanPos.position, move.pointSpwanPos.rotation);
+            a.transform.parent = move.pointSpwanPos.transform;
+            Destroy(a, 0.5f);
             move.maxSize -= 0.00064f;
             pM.maxMod += 0.5f;
             pM.maxSize += pM.incrementSize;

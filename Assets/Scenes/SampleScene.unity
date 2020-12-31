@@ -3736,7 +3736,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365700004}
-  m_LocalRotation: {x: 0.22975288, y: 0.000000032428666, z: -0.000000007655368, w: 0.973249}
+  m_LocalRotation: {x: 0.22975288, y: 0.000000032428662, z: -0.000000007655367, w: 0.973249}
   m_LocalPosition: {x: 3.18, y: 1.0209999, z: -5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4860,9 +4860,21 @@ MonoBehaviour:
   initialSize: 0
   wood1: {fileID: 800811969}
   wood2: {fileID: 193894851}
+  pointSpwanPos: {fileID: 1473989692}
   woodPartile: {fileID: 2802367671755340762, guid: df5aee601914a9248bd7087e7286b107,
     type: 3}
+  rippleEffect: {fileID: 7844665227128943978, guid: e32024a281a8e88499390228bc14e8fe,
+    type: 3}
+  points: {fileID: 4567354372088018165, guid: fda96a99fd7acdd469a130882f54869a, type: 3}
   charecterPlayerAnime: {fileID: 5901410313724185564}
+  Player: {fileID: 1945885163}
+  E1: {fileID: 1077571098}
+  E2: {fileID: 204030395}
+  E3: {fileID: 1578436724}
+  PlayerName: Ray
+  Enemy1: Dave
+  Enemy2: Tom
+  Enemy3: Bill
 --- !u!1 &504128563
 GameObject:
   m_ObjectHideFlags: 0
@@ -11172,7 +11184,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182975856}
-  m_LocalRotation: {x: 0.22975288, y: 0.000000032428666, z: -0.000000007655368, w: 0.973249}
+  m_LocalRotation: {x: 0.22975288, y: 0.000000032428662, z: -0.000000007655367, w: 0.973249}
   m_LocalPosition: {x: 3.18, y: 1.0209999, z: -5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19411,6 +19423,7 @@ MonoBehaviour:
   incrementSize: 0.2
   initialSize: 0.12
   delay: 0.8
+  rippleDelay: 0.2
   maxMod: 6
   initMod: 6
   ab: 0

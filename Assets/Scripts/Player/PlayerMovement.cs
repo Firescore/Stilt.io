@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 currentPos;
     private float incrementalPos;
     public float maxSize=0f, currentSize=0, incrementSpeed=0.01f, incrementSize=0.11f, initialSize = 0f;
-    public float delay;
+    public float delay, rippleDelay;
     float x,y,speedR;
     float m,n;
     float currentPosOfMod, modSpeed;
@@ -28,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     public bool ab,a;
 
     private void Start() {
-    //child = transform.GetChild(0).gameObject;
+        //child = transform.GetChild(0).gameObject;
+        a = false;
 }
     private void Update()
     {
@@ -63,10 +64,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        if (transform.position == rS.nextPosition)
+        if (transform.position == rS.nextPosition )
         {
             ab = false;
-            a = false;
+            StartCoroutine(ripple(rippleDelay));
+            
         }
         value();
         test();
@@ -133,15 +135,26 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)){
             fallAnime.SetTrigger("fall");
             anime.SetTrigger("fall");
+            a = false;
             yield return new WaitForSeconds(t);
-
             Destroy(Instantiate(mv.woodPartile, mv.wood1.position, Quaternion.Euler(10,5,10)), 1);
             Destroy(Instantiate(mv.woodPartile, mv.wood2.position, Quaternion.Euler(10, 5, 10)), 1);
             mv.setSizeInitial();
             cameraScript.inisalPos();
             setInSize();
             ab = true;
- /*           currentSize = initialSize;*/
+/*            yield return new WaitForSeconds(0.35f);
+            */
+        }
+    }
+    IEnumerator ripple(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (!a)
+        {
+            Destroy(Instantiate(mv.rippleEffect, mv.wood1.position, Quaternion.Euler(90, 0, 0)), 1);
+            Destroy(Instantiate(mv.rippleEffect, mv.wood2.position, Quaternion.Euler(90, 0, 0)), 1);
+            a = true;
         }
     }
     void test()
