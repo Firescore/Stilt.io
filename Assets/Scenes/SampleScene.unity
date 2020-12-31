@@ -3736,7 +3736,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365700004}
-  m_LocalRotation: {x: 0.22975288, y: 0.000000032428666, z: -0.000000007655368, w: 0.973249}
+  m_LocalRotation: {x: 0.2297529, y: -4.2725646e-15, z: 1.6836258e-15, w: 0.973249}
   m_LocalPosition: {x: 3.18, y: 1.0209999, z: -5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3790,7 +3790,7 @@ MonoBehaviour:
   offsetPosition: {x: 0, y: 2, z: -3}
   offsetPositionSpace: 1
   lookAt: 1
-  maxPos: -3.35
+  maxPos: -3.7
   currentPos: -3
   speed: 0.1
 --- !u!114 &365700010
@@ -11214,7 +11214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182975856}
-  m_LocalRotation: {x: 0.22975288, y: 0.000000032428666, z: -0.000000007655368, w: 0.973249}
+  m_LocalRotation: {x: 0.2297529, y: -4.2725646e-15, z: 1.6836258e-15, w: 0.973249}
   m_LocalPosition: {x: 3.18, y: 1.0209999, z: -5.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -19453,7 +19453,7 @@ MonoBehaviour:
   incrementSize: 0.2
   initialSize: 0.12
   delay: 0.8
-  rippleDelay: 0.5
+  rippleDelay: 0.05
   maxMod: 6
   initMod: 6
   ab: 0
