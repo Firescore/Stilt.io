@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     public float delay;
     float x,y,speedR;
     float m,n;
+    float currentPosOfMod, modSpeed;
+    public float maxMod, initMod = 6;
+    
 
     public bool ab,a;
 
@@ -49,7 +52,11 @@ public class PlayerMovement : MonoBehaviour
         }
         if (currentSize >= maxSize && ab)
         {
-            currentSize -= incrementSpeed * 4;
+            currentSize -= incrementSpeed * currentPosOfMod;
+        }
+        if(currentPosOfMod <= maxMod)
+        {
+            currentPosOfMod += modSpeed;
         }
 
 
@@ -118,7 +125,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void setInSize(){
         maxSize=initialSize;
-        
+        maxMod = initMod;
+        currentPosOfMod = maxMod;
     }
 
     IEnumerator teleportation(float t){
@@ -126,6 +134,9 @@ public class PlayerMovement : MonoBehaviour
             fallAnime.SetTrigger("fall");
             anime.SetTrigger("fall");
             yield return new WaitForSeconds(t);
+
+            Destroy(Instantiate(mv.woodPartile, mv.wood1.position, Quaternion.Euler(10,5,10)), 1);
+            Destroy(Instantiate(mv.woodPartile, mv.wood2.position, Quaternion.Euler(10, 5, 10)), 1);
             mv.setSizeInitial();
             cameraScript.inisalPos();
             setInSize();

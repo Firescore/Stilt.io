@@ -9,7 +9,7 @@ public class movement : MonoBehaviour
     public float initialSize = 0;
 
     public Transform wood1, wood2;
-
+    public GameObject woodPartile;
     [SerializeField] public Animator charecterPlayerAnime;
 
     private PlayerMovement pM;
