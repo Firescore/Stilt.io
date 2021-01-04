@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Wood : MonoBehaviour
 {
@@ -12,9 +10,12 @@ private void Start() {
     pM = FindObjectOfType<PlayerMovement>();
     move = FindObjectOfType<movement>();
     cF = FindObjectOfType<cameraFollow>();
-}
+
+
+    }
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("Player")){
+            pM.glt();
             GameObject a = Instantiate(move.points, move.pointSpwanPos.position+new Vector3(0,1,0), move.pointSpwanPos.rotation);
             a.transform.parent = move.pointSpwanPos.transform;
             Destroy(a, 0.5f);

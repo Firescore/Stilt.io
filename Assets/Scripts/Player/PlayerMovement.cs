@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,11 +8,13 @@ public class PlayerMovement : MonoBehaviour
     public Animator anime;
     public Animator fallAnime;
     public GameObject child;
+    public GameObject Ripple;
     public movement mv;
     public cameraFollow cameraScript;
     public RaycastSystem rS;
-    
     public Transform charecter;
+    public GameObject particle1, particle2, c1, c2;
+
 
     private Vector3 currentPos;
     private float incrementalPos;
@@ -29,11 +30,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() {
         //child = transform.GetChild(0).gameObject;
+        Ripple.SetActive(false);
         a = false;
-}
+    }
+
+    public float s = 0;
     private void Update()
     {
         incrementalPos = maxSize * 2;
+        if (s >= 0)
+        {
+            s -= 0.1f;
+        }
+        if (s <= 0)
+        {
+            particle1.SetActive(false);
+            particle2.SetActive(false);
+            c1.GetComponent<Renderer>().material = mat2;
+            c2.GetComponent<Renderer>().material = mat2;
+        }
 
         turnInput = Input.GetAxis("Horizontal");
         moveInput = Input.GetAxis("Vertical");
@@ -61,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
+        
 
 
         if (transform.position == rS.nextPosition )
@@ -74,6 +89,15 @@ public class PlayerMovement : MonoBehaviour
         test();
         fallDown();
         StartCoroutine(teleportation(delay));
+        animationT();
+    }
+    void animationT()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            anime.SetTrigger("down");
+            Ripple.SetActive(true);
+        }
     }
     void value(){
         child.transform.localPosition = new Vector3(child.transform.localPosition.x,currentSize,child.transform.localPosition.z);
@@ -147,13 +171,19 @@ public class PlayerMovement : MonoBehaviour
             */
         }
     }
+
+    public Transform tar, tar1;
     IEnumerator ripple(float t)
     {
         yield return new WaitForSeconds(t);
         if (!a)
         {
-            Destroy(Instantiate(mv.rippleEffect, mv.wood1.position, Quaternion.Euler(90, 0, 0)), 1);
-            Destroy(Instantiate(mv.rippleEffect, mv.wood2.position, Quaternion.Euler(90, 0, 0)), 1);
+            GameObject m = Instantiate(mv.rippleEffect, tar.position, Quaternion.Euler(90, 0, 0));
+            m.transform.parent = mv.wood1;
+            Destroy(m, 1);
+            GameObject n = Instantiate(mv.rippleEffect, tar1.position, Quaternion.Euler(90, 0, 0));
+            n.transform.parent = mv.wood2;
+            Destroy(n, 1);
             a = true;
         }
     }
@@ -165,8 +195,19 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
+    public Material mat1, mat2;
 
-
-
-
+    public void glt()
+    {
+        s = 2;
+        if (s >= 0)
+        {
+            particle1.SetActive(true);
+            particle2.SetActive(true);
+            c1.GetComponent<Renderer>().material = mat1;
+            c2.GetComponent<Renderer>().material = mat1;
+        }
+        
+    }
+   
 }
