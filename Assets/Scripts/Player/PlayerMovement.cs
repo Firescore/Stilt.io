@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            fallAnime.SetTrigger("ff");
             anime.SetTrigger("down");
             Ripple.SetActive(true);
         }
@@ -181,9 +182,15 @@ public class PlayerMovement : MonoBehaviour
             GameObject m = Instantiate(mv.rippleEffect, tar.position, Quaternion.Euler(90, 0, 0));
             m.transform.parent = mv.wood1;
             Destroy(m, 1);
+            GameObject l = Instantiate(mv.pEffect, tar.position, Quaternion.identity);
+            l.transform.parent = mv.wood1;
+            Destroy(l, 1);
             GameObject n = Instantiate(mv.rippleEffect, tar1.position, Quaternion.Euler(90, 0, 0));
             n.transform.parent = mv.wood2;
             Destroy(n, 1);
+            GameObject u = Instantiate(mv.pEffect, tar1.position, Quaternion.identity);
+            u.transform.parent = mv.wood1;
+            Destroy(u, 1);
             a = true;
         }
     }

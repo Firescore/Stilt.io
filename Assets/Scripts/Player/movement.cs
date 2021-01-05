@@ -14,6 +14,7 @@ public class movement : MonoBehaviour
 
     public GameObject woodPartile;
     public GameObject rippleEffect;
+    public GameObject pEffect;
     public GameObject points;
     [SerializeField] public Animator charecterPlayerAnime;
 
