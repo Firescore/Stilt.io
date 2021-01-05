@@ -20,7 +20,8 @@ private void Start() {
             a.transform.parent = move.pointSpwanPos.transform;
             Destroy(a, 0.5f);
             move.maxSize -= 0.00064f;
-            pM.maxMod += 0.5f;
+            pM.maxMod += 1f;
+            //pM.JumpSpeed -= 0.05f;
             pM.maxSize += pM.incrementSize;
             cF.maxPos -= 0.35f;
             Destroy(gameObject);
@@ -33,4 +34,6 @@ private void Start() {
         }
     
     }
+
+    
 }

@@ -62,6 +62,11 @@ public float maxPos, currentPos, speed;
             transform.rotation = target.rotation;
         }
     }
+
+    public void setPos()
+    {
+        maxPos = 4;
+    }
     public void inisalPos(){
         maxPos = initialPos;
     }

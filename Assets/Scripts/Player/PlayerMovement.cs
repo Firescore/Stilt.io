@@ -13,20 +13,23 @@ public class PlayerMovement : MonoBehaviour
     public cameraFollow cameraScript;
     public RaycastSystem rS;
     public Transform charecter;
-    public GameObject particle1, particle2, c1, c2;
+    public GameObject particle1, particle2, c1, c2, camera;
 
 
     private Vector3 currentPos;
     private float incrementalPos;
     public float maxSize=0f, currentSize=0, incrementSpeed=0.01f, incrementSize=0.11f, initialSize = 0f;
-    public float delay, rippleDelay;
-    float x,y,speedR;
+    public float delay, rippleDelay, waterFallDelay;
+    float x, y;
+    public float JumpSpeed = 4f;
     float m,n;
-    float currentPosOfMod, modSpeed;
+    public float currentPosOfMod, modSpeed = 0.5f;
     public float maxMod, initMod = 6;
     
 
-    public bool ab,a;
+    public bool ab,a, iniPosOfPlayer = false;
+
+
 
     private void Start() {
         //child = transform.GetChild(0).gameObject;
@@ -37,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
     public float s = 0;
     private void Update()
     {
+        if(Ripple != null)
+        {
+            Ripple.transform.position = new Vector3(transform.position.x, Ripple.transform.position.y, transform.position.z);
+        }
+        
         incrementalPos = maxSize * 2;
         if (s >= 0)
         {
@@ -66,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentSize += incrementSpeed;
         }
-        if (currentSize >= maxSize && ab)
+        if (currentSize >= maxSize && iniPosOfPlayer)
         {
             currentSize -= incrementSpeed * currentPosOfMod;
         }
@@ -74,22 +82,44 @@ public class PlayerMovement : MonoBehaviour
         {
             currentPosOfMod += modSpeed;
         }
+        if(currentSize <= (initialSize-0.01f))
+        {
+            iniPosOfPlayer = false;
+            if (!a)
+            {
+                GameObject m = Instantiate(mv.rippleEffect, tar.position, Quaternion.Euler(90, 0, 0));
+                m.transform.parent = mv.wood1;
+                Destroy(m, 1);
+                GameObject l = Instantiate(mv.pEffect, tar.position, Quaternion.identity);
+                l.transform.parent = mv.wood1;
+                Destroy(l, 1);
+                GameObject n = Instantiate(mv.rippleEffect, tar1.position, Quaternion.Euler(90, 0, 0));
+                n.transform.parent = mv.wood2;
+                Destroy(n, 1);
+                GameObject u = Instantiate(mv.pEffect, tar1.position, Quaternion.identity);
+                u.transform.parent = mv.wood1;
+                Destroy(u, 1);
+                a = true;
+            }
+        }
 
-
-        
-
-
-        if (transform.position == rS.nextPosition )
+        if (transform.position == new Vector3(rS.nextPosition.x,0.401f, rS.nextPosition.z))
         {
             ab = false;
-            StartCoroutine(ripple(rippleDelay));
+            //StartCoroutine(ripple(rippleDelay));
+
             
+
         }
+
+        
         value();
         test();
         fallDown();
         StartCoroutine(teleportation(delay));
-        animationT();
+        StartCoroutine(fallIntoWater(waterFallDelay));
+        StartCoroutine(finsihJump());
+        //animationT();
     }
     void animationT()
     {
@@ -108,33 +138,6 @@ public class PlayerMovement : MonoBehaviour
     
     void fallDown(){
 
-        if(Input.GetKeyDown(KeyCode.E)){
-
-            
-            /*anime.enabled = false;
-            speedR = 5;
-            x=50;
-            if(y <= x){
-                y += speedR;
-            }
-
-            m = 55;
-
-            if (n >= m)
-            {
-                n -= speedR;
-            }
-
-            e = 0.0000001f;
-            a = 0.185f;
-            c = 0.34f;
-
-            transform.rotation = Quaternion.Euler(y,transform.eulerAngles.y,transform.eulerAngles.z);
-
-            charecter.rotation = Quaternion.Euler(n, transform.eulerAngles.y, transform.eulerAngles.z);
-            charecter.localPosition = new Vector3(0, b, d);*/
-            /*cameraScript.enabled = false;*/
-        }
 
         if(Input.GetKeyUp(KeyCode.E)){
             y=0;
@@ -147,6 +150,17 @@ public class PlayerMovement : MonoBehaviour
             charecter.rotation = Quaternion.Euler(n, transform.eulerAngles.y, transform.eulerAngles.z);
             charecter.localPosition = new Vector3(0, b, d);
             /*cameraScript.enabled = true;*/
+        }
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            y = 0;
+            n = 0;
+            b = 0;
+            d = 0;
+
+            transform.rotation = Quaternion.Euler(y, transform.eulerAngles.y, transform.eulerAngles.z);
+            charecter.rotation = Quaternion.Euler(n, transform.eulerAngles.y, transform.eulerAngles.z);
+            charecter.localPosition = new Vector3(0, b, d);
         }
     }
 
@@ -162,23 +176,42 @@ public class PlayerMovement : MonoBehaviour
             anime.SetTrigger("fall");
             a = false;
             yield return new WaitForSeconds(t);
+            iniPosOfPlayer = true;
             Destroy(Instantiate(mv.woodPartile, mv.wood1.position, Quaternion.Euler(10,5,10)), 1);
             Destroy(Instantiate(mv.woodPartile, mv.wood2.position, Quaternion.Euler(10, 5, 10)), 1);
             mv.setSizeInitial();
             cameraScript.inisalPos();
             setInSize();
             ab = true;
-/*            yield return new WaitForSeconds(0.35f);
-            */
+        }
+    }
+
+
+
+    IEnumerator fallIntoWater(float t)
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            
+            fallAnime.SetTrigger("ff");
+            anime.SetTrigger("down");
+            yield return new WaitForSeconds(t);
+            mv.setSizeInitial();
+            setInSize();
+            ab = true;
+            yield return new WaitForSeconds(0.35f);
+            camera.GetComponent<Cinemachine.CinemachineBrain>().enabled = false;
+            Ripple.SetActive(true);
         }
     }
 
     public Transform tar, tar1;
     IEnumerator ripple(float t)
     {
-        yield return new WaitForSeconds(t);
+        
         if (!a)
         {
+            yield return new WaitForSeconds(t);
             GameObject m = Instantiate(mv.rippleEffect, tar.position, Quaternion.Euler(90, 0, 0));
             m.transform.parent = mv.wood1;
             Destroy(m, 1);
@@ -194,11 +227,12 @@ public class PlayerMovement : MonoBehaviour
             a = true;
         }
     }
+
     void test()
     {
         if (ab)
         {
-            transform.position = Vector3.MoveTowards(transform.position, rS.nextPosition, 4f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(rS.nextPosition.x,0.401f, rS.nextPosition.z), JumpSpeed * Time.deltaTime);
         }
         
     }
@@ -217,4 +251,18 @@ public class PlayerMovement : MonoBehaviour
         
     }
    
+
+    public IEnumerator finsihJump()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            anime.SetTrigger("FALLDOWN");
+            fallAnime.SetTrigger("FALLDOWN");
+            yield return new WaitForSeconds(1.5f);
+            mv.setSizeInitial();
+            cameraScript.inisalPos();
+            setInSize();
+        }
+        
+    }
 }

@@ -22,6 +22,10 @@ public class RaycastSystem : MonoBehaviour
             {
                 nextPosition = hit.point;
             }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                nextPosition = hit.point;
+            }
         }
        
             

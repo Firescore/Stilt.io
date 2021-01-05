@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-
 public class movement : MonoBehaviour
 {
 
@@ -16,6 +15,7 @@ public class movement : MonoBehaviour
     public GameObject rippleEffect;
     public GameObject pEffect;
     public GameObject points;
+    public GameObject cam,cam2;
     [SerializeField] public Animator charecterPlayerAnime;
 
     public TextMeshPro Player;
