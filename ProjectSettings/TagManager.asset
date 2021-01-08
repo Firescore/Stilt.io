@@ -6,6 +6,9 @@ TagManager:
   tags:
   - wood
   - Enemy
+  - FxTemporaire
+  - 1
+  - 2
   layers:
   - Default
   - TransparentFX
